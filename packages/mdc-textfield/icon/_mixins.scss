@@ -25,6 +25,7 @@
 
 @use '@material/rtl/mixins' as rtl-mixins;
 @use '@material/theme/theme';
+@use '@material/touch-target/mixins' as touch-target-mixins;
 @use '@material/feature-targeting/feature-targeting';
 @use './variables';
 
@@ -133,6 +134,10 @@
       variables.$leading-icon-padding-right
     );
   }
+  @include touch-target-mixins.margin(
+    $component-height: variables.$icon-size,
+    $query: $query
+  );
 }
 
 @mixin trailing-icon_($query: feature-targeting.all()) {
@@ -145,6 +150,10 @@
       variables.$trailing-icon-padding-right
     );
   }
+  @include touch-target-mixins.margin(
+    $component-height: variables.$icon-size,
+    $query: $query
+  );
 }
 
 @mixin leading-icon-color_($color, $query: feature-targeting.all()) {
