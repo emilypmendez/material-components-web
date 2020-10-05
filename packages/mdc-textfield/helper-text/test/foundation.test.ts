@@ -42,6 +42,7 @@ describe('MDCTextFieldHelperTextFoundation', () => {
       'addClass',
       'removeClass',
       'hasClass',
+      'getAttr',
       'setAttr',
       'removeAttr',
       'setContent',
@@ -56,6 +57,39 @@ describe('MDCTextFieldHelperTextFoundation', () => {
 
   it('istanbul code coverage', () => {
     expect(() => new MDCTextFieldHelperTextFoundation).not.toThrow();
+  });
+
+  it('#getId retrieves ID', () => {
+    const {foundation, mockAdapter} = setupTest();
+    mockAdapter.getAttr.and.returnValue('bar');
+
+    expect(foundation.getId('foo')).toEqual('bar');
+  });
+
+  it('#isPersistent retrieves correct value', () => {
+    const {foundation, mockAdapter} = setupTest();
+    mockAdapter.hasClass.withArgs(cssClasses.HELPER_TEXT_PERSISTENT)
+        .and.returnValue(true);
+
+    expect(foundation.isPersistent()).toEqual(true);
+
+    mockAdapter.hasClass.withArgs(cssClasses.HELPER_TEXT_PERSISTENT)
+        .and.returnValue(false);
+
+    expect(foundation.isPersistent()).toEqual(false);
+  });
+
+  it('#isValidation retrieves correct value', () => {
+    const {foundation, mockAdapter} = setupTest();
+    mockAdapter.hasClass.withArgs(cssClasses.HELPER_TEXT_VALIDATION_MSG)
+        .and.returnValue(true);
+
+    expect(foundation.isValidation()).toEqual(true);
+
+    mockAdapter.hasClass.withArgs(cssClasses.HELPER_TEXT_VALIDATION_MSG)
+        .and.returnValue(false);
+
+    expect(foundation.isValidation()).toEqual(false);
   });
 
   it('#setContent sets the content of the helper text element', () => {
