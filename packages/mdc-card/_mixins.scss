@@ -64,6 +64,12 @@
     @include feature-targeting.targets($feat-structure) {
       @include container-layout_;
     }
+
+    &:not(.mdc-card--outlined) {
+      @include feature-targeting.targets($feat-structure) {
+        outline: 1px solid transparent;
+      }
+    }
   }
 
   .mdc-card--outlined {
